@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TodoListReBuild.Models;
 
 namespace TodoListReBuild.UserControls
 {
@@ -24,6 +25,28 @@ namespace TodoListReBuild.UserControls
         public TaskControlPanel()
         {
             InitializeComponent();
+            //DataContext = new MainViewModel();
+        }
+
+        public static readonly DependencyProperty DetailCommandProperty = DependencyProperty.Register(
+        nameof(DetailCommand),
+        typeof(ICommand),
+        typeof(TaskControlPanel),
+        new PropertyMetadata(default(ICommand), OnDetailCommandChanged, CoerceDetailCommand));
+        public ICommand DetailCommand
+        {
+            get => (ICommand)GetValue(DetailCommandProperty);
+            set => SetValue(DetailCommandProperty, value);
+        }
+        private static void OnDetailCommandChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            TaskControlPanel panel = d as TaskControlPanel;
+            TaskViewModel viewModel = panel.DataContext as TaskViewModel;
+            viewModel.DetailCommand = e.NewValue as ICommand;
+        }
+        private static object CoerceDetailCommand(DependencyObject d, object baseValue)
+        {
+            return baseValue;
         }
     }
 }

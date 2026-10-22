@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace TodoListReBuild.Models
 {
@@ -33,14 +34,47 @@ namespace TodoListReBuild.Models
             }
         }
 
-        private Visibility _testVisibility = Visibility.Collapsed;
+        private Visibility _textVisibility = Visibility.Collapsed;
         public Visibility TextBoxVisibility
         {
-            get { return _testVisibility; }
+            get { return _textVisibility; }
             set
             {
-                _testVisibility = value;
+                _textVisibility = value;
                 OnPropertyChanged(nameof(TextBoxVisibility));
+            }
+        }
+
+        private Visibility _modifyButVisibility = Visibility.Visible;
+        public Visibility ModifyButVisibility
+        {
+            get { return _modifyButVisibility; }
+            set
+            {
+                _modifyButVisibility = value;
+                OnPropertyChanged(nameof(ModifyButVisibility));
+            }
+        }
+
+        private Visibility _saveButVisibility = Visibility.Collapsed;
+        public Visibility SaveButVisibility
+        {
+            get { return _saveButVisibility; }
+            set
+            {
+                _saveButVisibility = value;
+                OnPropertyChanged(nameof(SaveButVisibility));
+            }
+        }
+
+        private ICommand _detailCommand;
+        public ICommand DetailCommand
+        {
+            get { return _detailCommand; }
+            set
+            {
+                _detailCommand = value;
+                OnPropertyChanged(nameof(DetailCommand));
             }
         }
 

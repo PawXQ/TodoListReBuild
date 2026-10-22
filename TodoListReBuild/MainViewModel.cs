@@ -33,6 +33,7 @@ namespace TodoListReBuild
         public ICommand ModifyTaskCommand { get; set; }
         public ICommand SaveTaskCommand { get; set; }
         public ICommand RemoveTaskCommand { get; set; }
+        public ICommand DetailTaskCommand { get; set; }
 
         private string _addTask = "Add";
         public string AddTask
@@ -70,6 +71,8 @@ namespace TodoListReBuild
 
             this.SaveTaskCommand = new RelayCommand<TaskViewModel>((x) =>
             {
+                x.ModifyButVisibility = Visibility.Visible;
+                x.SaveButVisibility = Visibility.Collapsed;
                 TaskModel taskModel = new TaskModel(x.Id, x.Content);
                 this.taskPresenter.SaveTask(taskModel);
                 x.LabelVisibility = Visibility.Visible;
@@ -78,6 +81,8 @@ namespace TodoListReBuild
 
             this.ModifyTaskCommand = new RelayCommand<TaskViewModel>((x) =>
             {
+                x.SaveButVisibility = Visibility.Visible;
+                x.ModifyButVisibility = Visibility.Collapsed;
                 x.LabelVisibility = Visibility.Collapsed;
                 x.TextBoxVisibility = Visibility.Visible;
             }, (x) => true);
@@ -86,6 +91,12 @@ namespace TodoListReBuild
             {
                 TaskModel taskModel = new TaskModel(x.Id, x.Content);
                 this.taskPresenter.RemoveTask(taskModel);
+            }, (x) => true);
+
+            this.DetailTaskCommand = new RelayCommand<TaskViewModel>((x) =>
+            {
+                Console.WriteLine(x.Id);
+                Console.WriteLine(x.Content);
             }, (x) => true);
         }
 

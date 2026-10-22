@@ -39,8 +39,31 @@
                 <ItemsControl ItemsSource="{Binding TaskViewModels}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
+                            <!--<StackPanel Margin="5" Orientation="Horizontal">
+                                <Label Content="{Binding Content}" Visibility="{Binding LabelVisibility}" />
+                                <TextBox Text="{Binding Content}" Visibility="{Binding TextBoxVisibility}" />
+                                <Button
+                                    Command="{Binding DataContext.RemoveTaskCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                    CommandParameter="{Binding}"
+                                    Content="Delete" />
+                                <Button
+                                    Command="{Binding DataContext.ModifyTaskCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                    CommandParameter="{Binding}"
+                                    Content="Modify"
+                                    Visibility="{Binding ModifyButVisibility}" />
+                                <Button
+                                    Command="{Binding DataContext.SaveTaskCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                    CommandParameter="{Binding}"
+                                    Content="Save"
+                                    Visibility="{Binding SaveButVisibility}" />
+                                <Button
+                                    Command="{Binding DataContext.DetailTaskCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                    CommandParameter="{Binding}"
+                                    Content="Detail" />
 
-                            <local:TaskControlPanel />
+                            </StackPanel>-->
+                            <local:TaskControlPanel DetailCommand="{Binding DataContext.DetailTaskCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
+
 
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

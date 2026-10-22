@@ -19,11 +19,17 @@
             <Button
                 Command="{Binding DataContext.ModifyTaskCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                 CommandParameter="{Binding}"
-                Content="Modify" />
+                Content="Modify"
+                Visibility="{Binding ModifyButVisibility}" />
             <Button
                 Command="{Binding DataContext.SaveTaskCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                 CommandParameter="{Binding}"
-                Content="Save" />
+                Content="Save"
+                Visibility="{Binding SaveButVisibility}" />
+            <Button
+                Command="{Binding DetailCommand}"
+                CommandParameter="{Binding}"
+                Content="Detail" />
 
         </StackPanel>
     </Grid>
